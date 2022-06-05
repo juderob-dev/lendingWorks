@@ -34,25 +34,57 @@ public class shoppingCart {
 
     }
     public double checkOut(){
+        int cCount=0;
+        int cValue=0;
+        int bCount=0;
+        int bValue=0;
 
-        int cCount=items.get("C");
-        int cValue=cCount/3>=1?((cCount/3)*itemPrice.get("C")*2)+((cCount%3)*itemPrice.get("C")):(cCount%3)*itemPrice.get("C");
 
-        int bCount=items.get("B");
         int bPrice=itemPrice.get("B");
-        int bValue=bCount/2>=1?((bCount/2)*bPrice)+((bCount%2)*bPrice):((bCount%2)*bPrice);
+        if(items.containsKey("C")){
+            cCount=items.get("C");
+            cValue=cCount/3>=1?((cCount/3)*itemPrice.get("C")*2)+((cCount%3)*itemPrice.get("C")):(cCount%3)*itemPrice.get("C");
 
+        }
+        if(items.containsKey("B")){
+            bCount=items.get("B");
 
-        int dCount=items.get("D");
+            bValue=bCount/2>=1?((bCount/2)*bPrice)+((bCount%2)*bPrice):((bCount%2)*bPrice);
+
+        }
+        int dCount=0;
+        int eCount=0;
         int dPrice=itemPrice.get("D");
-        int eCount=items.get("E");
+
+        if(items.containsKey("D")){
+            dCount=items.get("D");
+
+
+        }
+        if(items.containsKey("E")){
+            eCount=items.get("E");
+
+        }
+        int aCount=0;
+        if(items.containsKey("A")){
+            aCount=items.get("A");
+
+        }
+
+
+
+
+
+
+
+
         int ePrice=itemPrice.get("E");
         int cDandE=Math.min(dCount,eCount);
 
         int dValue=(dCount-cDandE)*dPrice;
         int eValue=(eCount-cDandE)*ePrice;
         int vDandE=cDandE*300;
-        int total=(items.get("A")*itemPrice.get("A"))+bValue+cValue+dValue+eValue+vDandE;
+        int total=(aCount*itemPrice.get("A"))+bValue+cValue+dValue+eValue+vDandE;
         double result=(double)total/100;
 
 
