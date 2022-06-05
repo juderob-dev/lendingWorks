@@ -2,10 +2,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.text.DecimalFormat;
 
 public class shoppingCart {
     private  HashMap<String,Integer> itemPrice=new HashMap<String,Integer>();
     private HashMap<String,Integer> items=new HashMap<String,Integer>();
+
+    /*created constructor  to add item to cart */
     public shoppingCart(){
         itemPrice.put("A",50);
         itemPrice.put("B",60);
@@ -13,15 +16,16 @@ public class shoppingCart {
         itemPrice.put("D",150);
         itemPrice.put("E",200);
     }
+    /*created fuction to add item to cart */
     public void addTo(String item){
         if (item.toUpperCase().equals("A") || item.toUpperCase().equals("B")|| item.toUpperCase().equals("C")|| item.toUpperCase().equals("D")|| item.toUpperCase().equals("E")){
-            if (!this.items.containsKey(item)){
-                this.items.put(item,1);
+            if (!this.items.containsKey(item.toUpperCase())){
+                this.items.put(item.toUpperCase(),1);
 
             }
             else{
-                int temp=this.items.get(item);
-                this.items.put(item,temp+1);
+                int temp=this.items.get(item.toUpperCase());
+                this.items.put(item.toUpperCase(),temp+1);
             }
 
         }
@@ -32,8 +36,8 @@ public class shoppingCart {
 
 
 
-    }
-    public double checkOut(){
+    }/* create check out fuction so user was able to checkout */
+    public String checkOut(){
         int cCount=0;
         int cValue=0;
         int bCount=0;
@@ -81,19 +85,29 @@ public class shoppingCart {
         int ePrice=itemPrice.get("E");
         int cDandE=Math.min(dCount,eCount);
 
+
         int dValue=(dCount-cDandE)*dPrice;
         int eValue=(eCount-cDandE)*ePrice;
         int vDandE=cDandE*300;
         int total=(aCount*itemPrice.get("A"))+bValue+cValue+dValue+eValue+vDandE;
         double result=(double)total/100;
+        /* created decimal format so it could come out as money*/
+        DecimalFormat x= new DecimalFormat("£0.00");
+        return x.format(result);
 
 
-        return result;
 
 
 
 
 
+
+
+
+    }
+    public String toString(){
+        DecimalFormat x= new DecimalFormat("£###.###");
+        return x.format(this.checkOut());
 
 
     }
